@@ -1,6 +1,6 @@
 import { Affix, Drawer, Layout } from 'antd'
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation,Outlet } from 'react-router-dom'
 import Footer from './Footer'
 import Header from './Header'
 import Sidenav from './Sidenav'
@@ -110,7 +110,9 @@ function Main({ children }) {
                         />
                     </AntHeader>
                 )}
-                <Content className="content-ant">{children}</Content>
+                <Content className="content-ant">
+                <Outlet/>
+                </Content>
                 <Footer />
             </Layout>
         </Layout>
