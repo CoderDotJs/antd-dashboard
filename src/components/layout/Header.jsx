@@ -25,27 +25,8 @@ import {
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import avtar from '../../assets/images/team-2.jpg';
-
-const ButtonContainer = styled.div`
-  .ant-btn-primary {
-    background-color: #1890ff;
-  }
-  .ant-btn-success {
-    background-color: #52c41a;
-  }
-  .ant-btn-yellow {
-    background-color: #fadb14;
-  }
-  .ant-btn-black {
-    background-color: #262626;
-    color: #fff;
-    border: 0px;
-    border-radius: 5px;
-  }
-  .ant-switch-active {
-    background-color: #1890ff;
-  }
-`;
+import ConfigurationDrawer from '../Drawer/ConfigurationDrawer';
+import AnnouncementsDrawer from '../Drawer/AnnouncementsDrawer';
 
 const bell = [
   <svg
@@ -240,12 +221,16 @@ function Header({
   const { Title, Text } = Typography;
 
   const [visible, setVisible] = useState(false);
+  const [Announcementsvisible, setAnnouncementsVisible] = useState(false);
   const [sidenavType, setSidenavType] = useState('transparent');
 
   useEffect(() => window.scrollTo(0, 0));
 
   const showDrawer = () => setVisible(true);
   const hideDrawer = () => setVisible(false);
+
+  const showAnnouncementsDrawer = () => setAnnouncementsVisible(true);
+  const hideAnnouncementsDrawer = () => setAnnouncementsVisible(false);
 
   return (
     <>
@@ -313,6 +298,9 @@ function Header({
           <Button type="link" onClick={showDrawer}>
             {logsetting}
           </Button>
+          <Button type="link" onClick={showAnnouncementsDrawer}>
+            ++
+          </Button>
           <Button
             type="link"
             className="sidebar-toggler"
@@ -320,7 +308,8 @@ function Header({
           >
             {toggler}
           </Button>
-          <Drawer
+
+          {/* <Drawer
             className="settings-drawer"
             mask={true}
             width={360}
@@ -404,8 +393,32 @@ function Header({
                   <Switch onChange={(e) => handleFixedNavbar(e)} />
                 </div>
               </div>
+
             </div>
-          </Drawer>
+          </Drawer> */}
+
+          <ConfigurationDrawer
+            placement={placement}
+            visible={visible}
+            onClose={hideDrawer}
+            handleSidenavColor={handleSidenavColor}
+            handleSidenavType={handleSidenavType}
+            handleFixedNavbar={handleFixedNavbar}
+            sidenavType={sidenavType}
+            setSidenavType={setSidenavType}
+          />
+
+          <AnnouncementsDrawer
+            placement={placement}
+            visible={Announcementsvisible}
+            onClose={hideAnnouncementsDrawer}
+            handleSidenavColor={handleSidenavColor}
+            handleSidenavType={handleSidenavType}
+            handleFixedNavbar={handleFixedNavbar}
+            sidenavType={sidenavType}
+            setSidenavType={setSidenavType}
+          />
+
           <Link to="/sign-in" className="btn-sign-in">
             {profile}
             <span>Sign in</span>
